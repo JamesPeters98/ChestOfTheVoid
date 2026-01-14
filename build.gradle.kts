@@ -3,8 +3,8 @@ plugins {
     id("hytale-mod") version "0.+"
 }
 
-group = "com.example"
-version = "0.1.0"
+group = "com.jamesdpeters"
+version = "1.0.0"
 val javaVersion = 25
 
 repositories {
@@ -54,7 +54,7 @@ tasks.named<ProcessResources>("processResources") {
 }
 
 hytale {
-
+    gameDir = "G:\\Games\\Hytale"
 }
 
 tasks.withType<Jar> {

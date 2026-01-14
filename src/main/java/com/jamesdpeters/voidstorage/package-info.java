@@ -1,4 +1,4 @@
 @NullMarked
-package com.example.exampleplugin;
+package com.jamesdpeters.voidstorage;
 
 import org.jspecify.annotations.NullMarked;
