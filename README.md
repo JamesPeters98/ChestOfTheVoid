@@ -1,3 +1,3 @@
-# Hytale Plugin Template
+# Chest of the Void Hytale plugin
 
-A template for Hytale java plugins
+A Hytale plugin
