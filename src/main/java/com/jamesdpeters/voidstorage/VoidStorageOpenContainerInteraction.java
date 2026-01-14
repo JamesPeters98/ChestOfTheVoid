@@ -49,11 +49,18 @@ public class VoidStorageOpenContainerInteraction extends OpenContainerInteractio
             return;
 
         var voidStorage = commandBuffer.ensureAndGetComponent(ref, voidStorageComponentType);
+
         if (playerComponent != null) {
             BlockState container = world.getState(pos.x, pos.y, pos.z, true);
+
             if (container instanceof ItemContainerState itemContainerState) {
+                container.getChunk().setState(pos.x, pos.y, pos.z, new VoidStorageBlockState(itemContainerState));
+                container = world.getState(pos.x, pos.y, pos.z, true);
+            }
+
+            if (container instanceof VoidStorageBlockState itemContainerState) {
                 BlockType blockType = world.getBlockType(pos.x, pos.y, pos.z);
-                if (itemContainerState.isAllowViewing() && itemContainerState.canOpen(ref, commandBuffer)) {
+                if (itemContainerState.isAllowViewing()) {
                     UUIDComponent uuidComponent = commandBuffer.getComponent(ref, UUIDComponent.getComponentType());
 
                     assert uuidComponent != null;
@@ -108,8 +115,6 @@ public class VoidStorageOpenContainerInteraction extends OpenContainerInteractio
                             windows.remove(uuid, window);
                         }
                     }
-
-                    itemContainerState.onOpen(ref, world, store);
                 }
             } else {
                 playerComponent.sendMessage(

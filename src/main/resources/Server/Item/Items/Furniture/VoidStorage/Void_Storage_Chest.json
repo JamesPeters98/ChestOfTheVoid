@@ -34,7 +34,7 @@
     "Opacity": "Transparent",
     "ParticleColor": "#63412c",
     "State": {
-      "Id": "container",
+      "Id": "void_storage_container",
       "Custom": true,
       "Definitions": {
         "CloseWindow": {

@@ -2,10 +2,12 @@ package com.jamesdpeters.voidstorage;
 
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.server.core.modules.block.BlockModule;
 import com.hypixel.hytale.server.core.modules.entity.EntityModule;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.universe.world.meta.BlockStateModule;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jspecify.annotations.Nullable;
 
@@ -26,6 +28,11 @@ public class VoidStoragePlugin extends JavaPlugin {
         this.getCodecRegistry(Interaction.CODEC).register("VoidOpenContainer", VoidStorageOpenContainerInteraction.class, VoidStorageOpenContainerInteraction.CODEC);
         VOID_STORAGE = this.getEntityStoreRegistry().registerComponent(VoidStorageComponent.class, "VoidStorage", VoidStorageComponent.CODEC);
         LOGGER.atInfo().log("Registered VoidStorage component");
+    }
+
+    @Override
+    protected void start() {
+        this.getBlockStateRegistry().registerBlockState(VoidStorageBlockState.class, "void_storage_container", VoidStorageBlockState.CODEC);
     }
 
     @Nullable
