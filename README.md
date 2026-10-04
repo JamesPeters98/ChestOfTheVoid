@@ -3,7 +3,7 @@
 Adds a soulbound, 63-slot inventory that each player can open from any Chest of the
 Void. The items belong to the player, so breaking a chest does not drop them.
 
-Version 1.2.0 targets **Hytale 0.6.8, release patchline**, checked on 4 October 2026.
+Version 1.3.0 targets **Hytale 0.6.8, release patchline**, checked on 4 October 2026.
 Update 7 is currently on the pre-release patchline and is not a verified target.
 The manifest deliberately uses `=0.6.8` rather than claiming compatibility with
 every future server version.
