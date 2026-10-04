@@ -3,13 +3,13 @@ package com.jamesdpeters.voidstorage;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Component;
-import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.inventory.container.SimpleItemContainer;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.jspecify.annotations.Nullable;
 
 public class VoidStorageComponent implements Component<EntityStore> {
+
+    static final short CAPACITY = 63;
 
     public static final BuilderCodec<VoidStorageComponent> CODEC = BuilderCodec.builder(VoidStorageComponent.class, VoidStorageComponent::new)
             .append(new KeyedCodec<>("VoidStorage", ItemContainer.CODEC), (voidStorage, itemContainer, extraInfo) -> {
@@ -26,7 +26,7 @@ public class VoidStorageComponent implements Component<EntityStore> {
     private ItemContainer voidContainer = createDefaultContainer();
 
     @Override
-    public @Nullable Component<EntityStore> clone() {
+    public VoidStorageComponent clone() {
         var voidStorage = new VoidStorageComponent();
         voidStorage.setItemContainer(this.voidContainer.clone());
         return voidStorage;
@@ -41,7 +41,7 @@ public class VoidStorageComponent implements Component<EntityStore> {
     }
 
     ItemContainer createDefaultContainer() {
-        return new SimpleItemContainer((short) 63);
+        return new SimpleItemContainer(CAPACITY);
     }
 
 }

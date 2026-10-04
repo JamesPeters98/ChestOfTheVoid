@@ -14,6 +14,7 @@
   "BlockType": {
     "BlockParticleSetId": "Wood",
     "BlockSoundSetId": "Wood",
+    "PhysicalMaterialId": "Wood",
     "CustomModel": "Blocks/Decorative_Sets/Crude/Chest_Small.blockymodel",
     "CustomModelTexture": [
       {
@@ -22,9 +23,7 @@
       }
     ],
     "DrawType": "Model",
-    "Flags": {
-      "IsUsable": true
-    },
+    "HitboxType": "Chest_Small",
     "Gathering": {
       "Breaking": {
         "GatherType": "Woods"
@@ -34,8 +33,6 @@
     "Opacity": "Transparent",
     "ParticleColor": "#63412c",
     "State": {
-      "Id": "void_storage_container",
-      "Custom": true,
       "Definitions": {
         "CloseWindow": {
           "InteractionSoundEventId": "SFX_Chest_Wooden_Close",
@@ -44,6 +41,13 @@
         "OpenWindow": {
           "InteractionSoundEventId": "SFX_Chest_Void_Open",
           "CustomModelAnimation": "Blocks/Animations/Chest/Chest_Open.blockyanim"
+        }
+      }
+    },
+    "BlockEntity": {
+      "Components": {
+        "ItemContainerBlock": {
+          "Capacity": 1
         }
       }
     },
@@ -63,7 +67,6 @@
     },
     "VariantRotation": "NESW",
     "Interactions": {
-      "Primary": "Break_Container",
       "Use": "Void_Open_Container"
     }
   },

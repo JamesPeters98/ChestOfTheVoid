@@ -1,15 +1,15 @@
 plugins {
     `maven-publish`
-    id("hytale-mod") version "0.+"
+    id("hytale-mod") version "0.8.1"
 }
 
 group = "com.jamesdpeters"
-version = "1.1.0"
-val javaVersion = 25
+version = "1.2.0"
+val targetJavaVersion = 25
 
 repositories {
     mavenCentral()
-    maven("https://maven.hytale-modding.info/releases") {
+    maven("https://maven.hytale-mods.dev/releases") {
         name = "HytaleModdingReleases"
     }
 }
@@ -18,14 +18,14 @@ dependencies {
     compileOnly(libs.jetbrains.annotations)
     compileOnly(libs.jspecify)
 
-    // this mod is optional, but is included so you can preview your mod icon
-    // in the in-game mod list via the /modlist command
-    runtimeOnly(libs.bettermodlist)
+    testImplementation(files(hytale.serverJar))
+    testImplementation("org.junit.jupiter:junit-jupiter:6.1.3")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.1.3")
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(javaVersion)
+        languageVersion = JavaLanguageVersion.of(targetJavaVersion)
     }
 
     withSourcesJar()
@@ -54,7 +54,13 @@ tasks.named<ProcessResources>("processResources") {
 }
 
 hytale {
-    gameDir = "G:\\Games\\Hytale"
+    installDir = providers.gradleProperty("hytale.install_dir").getOrElse("G:\\Games\\Hytale")
+    disableSentry = true
+}
+
+tasks.test {
+    useJUnitPlatform()
+    systemProperty("java.util.logging.manager", "com.hypixel.hytale.logger.backend.HytaleLogManager")
 }
 
 tasks.withType<Jar> {
